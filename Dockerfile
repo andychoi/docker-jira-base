@@ -1,15 +1,14 @@
-FROM java:8u66-jre
+FROM anapsix/alpine-java:8u102b14_server-jre
 MAINTAINER Adrian Haasler García <dev@adrianhaasler.com>
 
 # Configuration
 ENV JIRA_HOME /data/jira
 
 # Install dependencies
-RUN apt-get update && apt-get install -y \
-	curl \
-	tar \
-	xmlstarlet
+RUN apk upgrade --update \
+	&& apk add --update curl	tar \
+	&& apk add xmlstarlet --update --repository http://dl-6.alpinelinux.org/alpine/edge/testing
 
 # Create the user that will run the jira instance and his home directory (also make sure that the parent directory exists)
 RUN mkdir -p $(dirname $JIRA_HOME) \
-	&& useradd -m -d $JIRA_HOME -s /bin/bash -u 547 jira
+	&& adduser -h $JIRA_HOME -s /bin/bash -u 547 -D jira
