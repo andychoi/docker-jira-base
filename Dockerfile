@@ -1,4 +1,4 @@
-FROM anapsix/alpine-java:8u102b14_server-jre
+FROM anapsix/alpine-java:8u144b01_server-jre
 MAINTAINER Adrian Haasler García <dev@adrianhaasler.com>
 
 # Configuration
